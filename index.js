@@ -12,7 +12,7 @@ const generateItemElement = function (item) {
   let itemTitle = `<span class='shopping-item shopping-item__checked'>${item.name}</span>`;
   if (!item.checked) {
     itemTitle = `
-     <span class='shopping-item'>${item.name}</span>
+     <span class='shopping-item'><input value='${item.name}'></input></span>
     `;
   }
 
@@ -25,6 +25,9 @@ const generateItemElement = function (item) {
         </button>
         <button class='shopping-item-delete js-item-delete'>
           <span class='button-label'>delete</span>
+        </button>
+        <button class='shopping-item-update js-item-update'>
+          <span class='button-label'>update</span>
         </button>
       </div>
     </li>`;
