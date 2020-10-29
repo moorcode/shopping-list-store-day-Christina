@@ -12,8 +12,10 @@ const generateItemElement = function (item) {
   let itemTitle = `<span class='shopping-item shopping-item__checked'>${item.name}</span>`;
   if (!item.checked) {
     itemTitle = `
-     <span class='shopping-item'><input value='${item.name}'></input></span>
-    `;
+     <span class='shopping-item'>
+     <input value='${item.name}' type="text" name="shopping-list-edit" class="js-shopping-list-edit">
+     </input>
+     </span>`;
   }
 
   return `
@@ -98,6 +100,21 @@ const getItemIdFromElement = function (item) {
     .data('item-id');
 };
 
+const updateListItemOnShoppingList = function (id) {
+  const newItemName = $('.js-shopping-list-edit').val();
+  store.items.name = newItemName;
+  render();
+};
+
+const handleUpdateItemClicked = function () {
+  $('.js-shopping-list').on('click', '.js-item-update', event => {
+    event.preventDefault();
+    const id = getItemIdFromElement(event.currentTarget);
+    updateListItem(id);
+    render();
+  });
+};
+
 /**
  * Responsible for deleting a list item.
  * @param {string} id 
@@ -163,6 +180,7 @@ const handleShoppingList = function () {
   handleItemCheckClicked();
   handleDeleteItemClicked();
   handleToggleFilterClick();
+  handleUpdateItemClicked();
 };
 
 // when the page loads, call `handleShoppingList`
